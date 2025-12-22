@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>케이비즈평생교육원 중소기업근로자주도훈련 포털</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    body {
+      font-family: "Pretendard", sans-serif;
+      color: #1E293B;
+      background-color: #F8FAFC;
+      word-break: keep-all;
+      line-height: 1.6;
+    }
+
+    /* 검은색 텍스트를 진한 회색으로 */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #1E293B !important;
+    }
+
+    .card-title,
+    .col-name {
+      color: #1E293B !important;
+    }
+
+    /* 히어로 배경 디자인 */
+    .hero-bg {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Canvas 배경 */
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* 격자 배경 */
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(190, 242, 100, 0.08) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(190, 242, 100, 0.08) 2px, transparent 2px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 80%);
+      animation: gridMove 20s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(60px, 60px);
+      }
+    }
+
+    /* 광원 효과 */
+    .tech-glow {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(190, 242, 100, 0.2) 0%, rgba(132, 204, 22, 0.1) 40%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      animation: glowPulse 10s ease-in-out infinite alternate;
+      z-index: 2;
+      filter: blur(60px);
+    }
+
+    .tech-glow-2 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      bottom: -150px;
+      left: -150px;
+      animation: glowPulse2 8s ease-in-out infinite alternate;
+      z-index: 2;
+      filter: blur(50px);
+    }
+
+    @keyframes glowPulse {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.4;
+      }
+
+      50% {
+        transform: translate(-50px, 50px) scale(1.1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translate(50px, -50px) scale(1.2);
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes glowPulse2 {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+      }
+
+      50% {
+        transform: translate(50px, -30px) scale(1.15);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translate(-30px, 40px) scale(1.05);
+        opacity: 0.4;
+      }
+    }
+
+    /* 글씨 애니메이션 */
+    .hero-title {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.4s forwards;
+    }
+
+    .hero-description {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.6s forwards;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.8s forwards;
+    }
+
+    .hero-robot {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.4s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 하이라이트 */
+    .ax-highlight {
+      background: linear-gradient(135deg, #BEF264 0%, #84CC16 100%);
+      color: #0F172A;
+      padding: 0 0.3em;
+      display: inline-block;
+      font-weight: 900;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(190, 242, 100, 0.3);
+      animation: highlightGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes highlightGlow {
+      0% {
+        box-shadow: 0 4px 20px rgba(190, 242, 100, 0.3);
+      }
+
+      100% {
+        box-shadow: 0 6px 30px rgba(190, 242, 100, 0.5);
+      }
+    }
+
+    .ax-highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* 카테고리 버튼 스타일 */
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2.5rem 0;
+    }
+
+    .category-btn {
+      background: white;
+      border: 2px solid #E2E8F0;
+      padding: 0.875rem 1.75rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .category-btn:hover {
+      background: linear-gradient(135deg, #BEF264 0%, #84CC16 100%);
+      color: #0F172A;
+      border-color: #BEF264;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(190, 242, 100, 0.3);
+    }
+
+    .category-btn.active {
+      background: linear-gradient(135deg, #BEF264 0%, #84CC16 100%);
+      color: #0F172A;
+      border-color: #BEF264;
+      box-shadow: 0 4px 15px rgba(190, 242, 100, 0.4);
+    }
+
+    /* 새로운 카드 디자인 (이미지 참고) */
+    .modern-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 0;
+      min-height: 240px;
+      max-height: 270px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      opacity: 1;
+    }
+
+    .modern-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-content {
+      flex: 1;
+      padding: 1.25rem;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-accent {
+      width: 80px;
+      background: linear-gradient(180deg, var(--accent-color-1) 0%, var(--accent-color-2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .card-accent::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -20px;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      border-radius: 0 1.5rem 1.5rem 0;
+      transform: skewX(-3deg);
+      z-index: -1;
+    }
+
+    .card-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: white;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    .card-icon-box {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      transition: transform 0.3s ease;
+    }
+
+    .modern-card:hover .card-icon-box {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .card-icon-box i {
+      font-size: 1.4rem;
+      color: white;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #0F172A;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .card-list li {
+      font-size: 0.8rem;
+      color: #64748B;
+      font-weight: 600;
+      padding: 0.35rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-color-1);
+      font-weight: 900;
+      transition: transform 0.3s ease;
+    }
+
+    .card-list li:hover {
+      color: #0F172A;
+      padding-left: 1.5rem;
+    }
+
+    .card-list li:hover::before {
+      transform: translateX(5px);
+    }
+
+    /* 카드 색상 - 블루 톤 통일 */
+    .modern-card {
+      --accent-color-1: #60A5FA;
+      --accent-color-2: #3B82F6;
+    }
+
+
+
+    /* CTA 버튼 향상 */
+    .hero-button {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .hero-button:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    /* 테이블 스타일 */
+    .table-container {
+      background: white;
+      border-radius: 1.5rem;
+      border: 1px solid #E2E8F0;
+      overflow-x: auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .schedule-table {
+      width: 100%;
+      min-width: 1400px;
+    }
+
+    .schedule-table th {
+      background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+      color: #475569;
+      font-weight: 800;
+      padding: 1.25rem 0.75rem;
+      font-size: 0.9rem;
+      border-bottom: 2px solid #E2E8F0;
+      white-space: nowrap;
+    }
+
+    .schedule-table td {
+      padding: 1rem 0.75rem;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .schedule-table tbody tr {
+      transition: all 0.2s ease;
+    }
+
+    .schedule-table tbody tr:hover {
+      background-color: #F8FAFC;
+    }
+
+    .schedule-active {
+      background-color: #F7FEE7 !important;
+      color: #3F6212 !important;
+      font-weight: 900;
+    }
+
+    .col-name {
+      font-weight: 800;
+      color: #0F172A;
+      text-align: left !important;
+      padding-left: 1.5rem !important;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .col-name:hover {
+      color: #84CC16;
+      padding-left: 2rem !important;
+    }
+
+    /* 모바일 반응형 */
+    @media (max-width: 1024px) {
+      .hero-robot lottie-player {
+        max-width: 350px !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg {
+        padding-top: 6rem !important;
+        padding-bottom: 8rem !important;
+        min-height: 75vh !important;
+      }
+
+      .hero-robot {
+        margin-top: 3rem;
+      }
+
+      .hero-robot lottie-player {
+        max-width: 280px !important;
+      }
+
+      .impact-card {
+        padding: 2rem;
+      }
+
+      .table-container {
+        border-radius: 1rem;
+        margin: 0 -1rem;
+      }
+
+      .schedule-table th,
+      .schedule-table td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .col-name {
+        font-size: 0.85rem !important;
+        padding-left: 1rem !important;
+      }
+
+      .col-name:hover {
+        padding-left: 1rem !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .schedule-table {
+        min-width: 1200px;
+      }
+
+      .schedule-table th,
+      .schedule-table td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="hero-bg text-white pt-20 pb-32 px-6 lg:px-24"
+    style="min-height: 85vh; display: flex; align-items: center;">
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Tech Glows -->
+    <div class="tech-glow"></div>
+    <div class="tech-glow-2"></div>
+
+    <div class="max-w-7xl mx-auto relative z-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <!-- 왼쪽: 텍스트 콘텐츠 -->
+        <div class="space-y-8 text-left">
+          <!-- 뱃지 상단 배치 (글라스모피즘, 작은 글씨) -->
+          <div
+            class="hero-badge inline-flex items-center gap-2 bg-white/10 border border-white/20 px-5 py-2.5 rounded-full backdrop-blur-md"
+            style="position: relative; z-index: 50;">
+            <i class="fas fa-bolt text-[#BEF264] text-sm"></i>
+            <span class="text-white font-bold" style="font-size: 0.9rem; letter-spacing: -0.01em;">2026
+              중소기업근로자주도훈련</span>
+          </div>
+
+          <!-- 메인 타이틀 -->
+          <h1 class="hero-title font-black"
+            style="font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.2; letter-spacing: -0.02em; margin-top: 1.5rem;">
+            <span class="text-white">성장의 핵심은</span><br>
+            <span class="ax-highlight">AI 실무 설계</span>
+          </h1>
+
+          <!-- 설명 -->
+          <p class="hero-description font-medium"
+            style="font-size: clamp(1.1rem, 2.5vw, 1.35rem); line-height: 1.7; letter-spacing: -0.01em; margin-top: 1.75rem; color: rgba(226, 232, 240, 0.9); max-width: 540px;">
+            직무 역량을 AX(AI Transformation)로 극대화하세요.<br>
+            실전 위주의 커리큘럼이 기업의 확실한 성장을 지원합니다.
+          </p>
+
+          <!-- CTA 버튼 -->
+          <div class="hero-cta" style="margin-top: 2.5rem;">
+            <button onclick="document.getElementById('schedule').scrollIntoView({behavior:'smooth'})"
+              class="hero-button bg-[#BEF264] text-[#1E293B] px-12 py-6 rounded-full font-black shadow-[0_20px_50px_rgba(190,242,100,0.3)] hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-3 relative"
+              style="font-size: 1.2rem; letter-spacing: -0.01em;">
+              <span class="relative z-10">교육 확인하기</span>
+              <i class="fas fa-calendar-alt relative z-10"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 오른쪽: Lottie 로봇 애니메이션 -->
+        <div class="hero-robot flex items-center justify-center">
+          <div class="relative">
+            <!-- Lottie 애니메이션 플레이어 -->
+            <lottie-player id="robotAnimation" src="animabot.json" background="transparent" speed="1"
+              style="width: 100%; max-width: 500px; height: auto;" loop autoplay>
+            </lottie-player>
+
+            <!-- 로봇 주변 장식 효과 -->
+            <div
+              class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-8 bg-[#BEF264] opacity-20 blur-3xl rounded-full">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- 카드 섹션 -->
+  <section class="py-20 md:py-32 bg-gradient-to-b from-[#F1F5F9] to-white -mt-16 relative z-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+      <!-- 섹션 타이틀 -->
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-[#0F172A] mb-4">전문 교육 카테고리</h2>
+      </div>
+
+      <!-- 카테고리 버튼 -->
+      <div class="category-buttons">
+        <button class="category-btn active" data-category="chatbot">챗봇·지식·자동화</button>
+        <button class="category-btn" data-category="marketing">마케팅·브랜딩</button>
+        <button class="category-btn" data-category="document">문서·기획</button>
+        <button class="category-btn" data-category="data">데이터·분석</button>
+        <button class="category-btn" data-category="ax">AX 실전 설계</button>
+        <button class="category-btn" data-category="web">웹개발·노코드</button>
+      </div>
+
+      <!-- 카드 그리드 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" id="cardContainer">
+
+        <!-- 카드 1: 챗봇·지식·자동화 -->
+        <div class="modern-card card-1" data-category="chatbot">
+          <div class="card-content">
+            <div class="card-icon-box">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3 class="card-title">챗봇·지식·자동화</h3>
+            <ul class="card-list">
+              <li onclick="location.href='course-detail.html?id=7'">업무지식 챗봇 기초</li>
+              <li onclick="location.href='course-detail.html?id=16'">Google Opal 활용 자동화</li>
+              <li onclick="location.href='course-detail.html?id=21'">AI 활용 엑셀 업무 자동화</li>
+            </ul>
+          </div>
+          <div class="card-accent">
+            <span class="card-number">01</span>
+          </div>
+        </div>
+
+        <!-- 카드 2: 마케팅·브랜딩 -->
+        <div class="modern-card card-2" data-category="marketing">
+          <div class="card-content">
+            <div class="card-icon-box">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3 class="card-title">마케팅·브랜딩</h3>
+            <ul class="card-list">
+              <li onclick="location.href='course-detail.html?id=12'">관계 기반 브랜딩 실무</li>
+              <li onclick="location.href='course-detail.html?id=14'">AI 이미지·영상 콘텐츠 제작</li>
+              <li onclick="location.href='course-detail.html?id=17'">매출 전환 상세페이지 제작</li>
+            </ul>
+          </div>
+          <div class="card-accent">
+            <span class="card-number">02</span>
+          </div>
+        </div>
+
+        <!-- 카드 3: 문서·기획·글쓰기 -->
+        <div class="modern-card card-3" data-category="document">
+          <div class="card-content">
+            <div class="card-icon-box">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h3 class="card-title">문서·기획·글쓰기</h3>
+            <ul class="card-list">
+              <li onclick="location.href='course-detail.html?id=13'">정부지원사업계획서 작성</li>
+              <li onclick="location.href='course-detail.html?id=19'">AI 활용 실무 글쓰기</li>
+              <li onclick="location.href='course-detail.html?id=20'">멀티플랫폼 콘텐츠 확장</li>
+            </ul>
+          </div>
+          <div class="card-accent">
+            <span class="card-number">03</span>
+          </div>
+        </div>
+
+        <!-- 카드 4: 데이터·분석 -->
+        <div class="modern-card card-4" data-category="data">
+          <div class="card-content">
+            <div class="card-icon-box">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="card-title">데이터·분석</h3>
+            <ul class="card-list">
+              <li onclick="location.href='course-detail.html?id=21'">엑셀 데이터 분석 자동화</li>
+              <li onclick="location.href='course-detail.html?id=18'">상세페이지 매출 최적화 설계</li>
+              <li onclick="location.href='course-detail.html?id=6'">재고 관리 데이터 구조 설계</li>
+            </ul>
+          </div>
+          <div class="card-accent">
+            <span class="card-number">04</span>
+          </div>
+        </div>
+
+        <!-- 카드 5: AX 실전 설계 -->
+        <div class="modern-card card-5" data-category="ax">
+          <div class="card-content">
+            <div class="card-icon-box">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="card-title">AX 실전 설계</h3>
+            <ul class="card-list">
+              <li onclick="location.href='course-detail.html?id=10'">AI와 일하는 방식 만들기</li>
+              <li onclick="location.href='course-detail.html?id=11'">조직 내 AI 시스템 기획</li>
+              <li onclick="location.href='course-detail.html?id=8'">기획·마케팅 실전 AX 설계</li>
+            </ul>
+          </div>
+          <div class="card-accent">
+            <span class="card-number">05</span>
+          </div>
+        </div>
+
+        <!-- 카드 6: 웹개발·노코드 -->
+        <div class="modern-card card-6" data-category="web">
+          <div class="card-content">
+            <div class="card-icon-box">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 class="card-title">웹개발·노코드</h3>
+            <ul class="card-list">
+              <li onclick="location.href='course-detail.html?id=2'">AI 기반 홈페이지 구축</li>
+              <li onclick="location.href='course-detail.html?id=3'">재고 관리 웹앱 제작</li>
+              <li onclick="location.href='course-detail.html?id=6'">Cursor 활용 관리자 페이지</li>
+            </ul>
+          </div>
+          <div class="card-accent">
+            <span class="card-number">06</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 일정표 섹션 -->
+  <section id="schedule" class="py-20 md:py-32 bg-white">
+    <div class="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-12">
+      <div class="text-center mb-12 md:mb-16 space-y-4">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0F172A] tracking-tight">2026 중소기업근로자주도훈련 일정</h2>
+        <p class="text-[#475569] text-lg md:text-xl font-medium">실무에 즉시 적용 가능한 21개의 AI 마스터 클래스</p>
+        <p class="text-[#475569] text-sm md:text-base mt-2">※ 과정명을 클릭하시면 상세 커리큘럼으로 연결됩니다.</p>
+      </div>
+
+      <div class="table-container">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">No</th>
+              <th style="min-width: 280px;">교육과정명</th>
+              <th style="width: 70px;">일수</th>
+              <th style="width: 70px;">시간</th>
+              <th style="width: 70px;">일반</th>
+              <th style="width: 70px;" class="text-blue-600">회원</th>
+              <th style="width: 80px;">1월</th>
+              <th style="width: 80px;">2월</th>
+              <th style="width: 80px;">3월</th>
+              <th style="width: 80px;">4월</th>
+              <th style="width: 80px;">5월</th>
+              <th style="width: 80px;">6월</th>
+              <th style="width: 80px;">7월</th>
+              <th style="width: 80px;">8월</th>
+              <th style="width: 80px;">9월</th>
+              <th style="width: 80px;">10월</th>
+              <th style="width: 80px;">11월</th>
+              <th style="width: 80px;">12월</th>
+            </tr>
+          </thead>
+          <tbody id="courseTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- 모바일 안내 -->
+      <div class="mt-6 text-center text-sm text-slate-500 md:hidden">
+        <i class="fas fa-hand-pointer mr-2"></i>좌우로 스크롤하여 전체 일정을 확인하세요
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA 섹션 (푸터 상단) -->
+  <section class="bg-gradient-to-r from-[#BEF264] to-[#84CC16] py-16 md:py-20">
+    <div class="max-w-4xl mx-auto text-center px-6">
+      <h2 class="text-3xl md:text-4xl font-black text-[#1E293B] mb-6">궁금하신 사항 있으시면 문의주세요</h2>
+      <p class="text-lg md:text-xl text-[#1E293B] mb-8 font-semibold">전문 상담원이 친절하게 안내해드립니다</p>
+      <a href="tel:02-865-1154"
+        class="inline-flex items-center gap-3 bg-[#1E293B] text-white px-10 py-5 rounded-full font-black text-xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] hover:scale-105 transition-all">
+        <i class="fas fa-phone"></i>
+        <span>상담 문의: 02-865-1154</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="bg-[#0B1120] text-slate-500 py-16 md:py-20 px-6 lg:px-24">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      <div class="space-y-3">
+        <h2 class="text-2xl md:text-3xl font-black tracking-tight" style="color: #ffffff !important;">케이비즈평생교육원 / Biz
+          Partners</h2>
+        <p class="text-slate-400 text-base md:text-lg">서울특별시 구로구 디지털로 30길 28 2층 207호 (마리오타워)</p>
+        <p class="text-slate-400 text-xs md:text-sm">Copyright © 2026 Biz Partners. All rights reserved.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+        <a href="tel:02-865-1154" class="flex items-center gap-3 group">
+          <div
+            class="w-12 h-12 rounded-full bg-[#BEF264] flex items-center justify-center transition-transform group-hover:scale-110">
+            <i class="fas fa-phone text-[#1E293B] text-lg"></i>
+          </div>
+          <span class="text-white font-bold text-lg">02-865-1154</span>
+        </a>
+        <a href="tel:02-865-1153" class="flex items-center gap-3 group">
+          <div
+            class="w-12 h-12 rounded-full bg-[#BEF264] flex items-center justify-center transition-transform group-hover:scale-110">
+            <i class="fas fa-fax text-[#1E293B] text-lg"></i>
+          </div>
+          <span class="text-white font-bold text-lg">02-865-1153</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Particle Canvas Animation
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    const numberOfParticles = window.innerWidth < 768 ? 50 : 100;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = `rgba(190, 242, 100, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+
+        for (let j = i + 1; j < particlesArray.length; j++) {
+          const dx = particlesArray[i].x - particlesArray[j].x;
+          const dy = particlesArray[i].y - particlesArray[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            ctx.strokeStyle = `rgba(190, 242, 100, ${0.2 * (1 - distance / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // 2. 교육과정 데이터 및 렌더링
+    const courses = [
+      { no: 1, name: "스마트워크 & AI 기반 업무혁신", url: "course-detail.html?id=1", d: 2, t: 8, p1: 35, p2: 32, s: { 3: 11, 5: 13, 6: 12, 10: 14 } },
+      { no: 2, name: "우리 회사 홈페이지를 내가 만들 수 있다고?", url: "course-detail.html?id=2", d: 1, t: 8, p1: 35, p2: 32, s: { 4: 3, 6: 15, 10: 4, 11: 13 } },
+      { no: 3, name: "우리 회사 재고 관리를 웹앱으로 내가 만들 수 있다고?", url: "course-detail.html?id=3", d: 1, t: 8, p1: 35, p2: 32, s: { 3: 13, 5: 13, 10: 2, 11: 15 } },
+      { no: 4, name: "우리 회사 챗봇을 웹앱으로 내가 만들 수 있다고?", url: "course-detail.html?id=4", d: 1, t: 8, p1: 35, p2: 32, s: { 3: 17, 4: 15, 6: 16, 9: 9 } },
+      { no: 5, name: "우리 회사 미니 웹서비스 만들기", url: "course-detail.html?id=5", d: 2, t: 16, p1: 65, p2: 60, s: { 4: 13, 6: 8, 9: 7, 11: 9 } },
+      { no: 6, name: "Cursor로 만드는 재고·출하 관리자 페이지", url: "course-detail.html?id=6", d: 2, t: 16, p1: 65, p2: 60, s: { 3: 10, 5: 12, 10: 8, 12: 10 } },
+      { no: 7, name: "회사 매뉴얼, FAQ를 담는 [업무지식 챗봇 기초]", url: "course-detail.html?id=7", d: 2, t: 16, p1: 65, p2: 60, s: { 4: 9, 5: 14, 9: 17, 11: 12 } },
+      { no: 8, name: "기획·마케팅 실무자를 위한 AX 실전 설계 (기본)", url: "course-detail.html?id=8", d: 2, t: 14, p1: 55, p2: 50, s: { 3: 23, 6: 22, 9: 14, 11: 26 } },
+      { no: 9, name: "기획·마케팅 실무자를 위한 AX 실전 설계 (심화)", url: "course-detail.html?id=9", d: 2, t: 16, p1: 65, p2: 60, s: { 4: 9, 6: 11, 9: 15, 10: 13 } },
+      { no: 10, name: "AX 실전 설계 : AI와 일하는 방식 만들기 (기본)", url: "course-detail.html?id=10", d: 1, t: 8, p1: 35, p2: 32, s: { 4: 20, 5: 18, 9: 14, 10: 19 } },
+      { no: 11, name: "AX 실전 설계 : AI와 일하는 방식 만들기 (심화)", url: "course-detail.html?id=11", d: 2, t: 16, p1: 65, p2: 60, s: { 3: 25, 5: 26, 9: 17, 10: 14 } },
+      { no: 12, name: "관계 기반 브랜딩 실무과정", url: "course-detail.html?id=12", d: 1, t: 7, p1: 33, p2: 30, s: { 3: 19, 5: 18, 6: 17, 9: 11 } },
+      { no: 13, name: "AI 활용 정부지원사업계획서 작성 실무", url: "course-detail.html?id=13", d: 1, t: 6, p1: 28, p2: 25, s: { 3: 26, 4: 23, 6: 19, 9: 2 } },
+      { no: 14, name: "기업 홍보 AI 이미지·영상 콘텐츠 제작", url: "course-detail.html?id=14", d: 1, t: 7, p1: 33, p2: 30, s: { 3: 27, 4: 17, 5: 22, 6: 18, 9: 4 } },
+      { no: 15, name: "AI 기반 멀티플랫폼 브랜딩 및 자동화", url: "course-detail.html?id=15", d: 2, t: 14, p1: 55, p2: 50, s: { 4: 13, 6: 8, 9: 7, 10: 12 } },
+      { no: 16, name: "AI 업무 자동화: Google Opal 과정", url: "course-detail.html?id=16", d: 1, t: 7, p1: 33, p2: 30, s: { 4: 27, 5: 15, 6: 23, 9: 10 } },
+      { no: 17, name: "매출 전환 AI 상세페이지 제작 실무", url: "course-detail.html?id=17", d: 1, t: 7, p1: 33, p2: 30, s: { 3: 26, 5: 27, 9: 2, 10: 16 } },
+      { no: 18, name: "AI 기반 매출 최적화 및 자동 개선", url: "course-detail.html?id=18", d: 2, t: 14, p1: 55, p2: 50, s: { 4: 14, 5: 12, 9: 8, 10: 13 } },
+      { no: 19, name: "업무에 바로 쓰는 AI 활용 실무 글쓰기", url: "course-detail.html?id=19", d: 1, t: 7, p1: 33, p2: 30, s: { 4: 2, 6: 26, 9: 21, 10: 22 } },
+      { no: 20, name: "AI 기반 멀티플랫폼 글쓰기 및 확장", url: "course-detail.html?id=20", d: 2, t: 14, p1: 55, p2: 50, s: { 3: 11, 5: 13, 9: 22, 10: 23 } },
+      { no: 21, name: "AI 활용 엑셀 업무 자동화 실무", url: "course-detail.html?id=21", d: 1, t: 4, p1: 25, p2: 20, s: { 4: 29, 5: 7, 10: 27, 11: 19 } },
+    ];
+
+    const tbody = document.getElementById('courseTableBody');
+    courses.forEach(c => {
+      let row = `<tr onclick="location.href='${c.url}'" class="cursor-pointer hover:bg-slate-50 transition-all">`;
+      row += `<td class="text-center text-slate-400 font-bold">${c.no}</td>`;
+      row += `<td class="col-name">${c.name}</td>`;
+      row += `<td class="text-center">${c.d}일</td>`;
+      row += `<td class="text-center">${c.t}H</td>`;
+      row += `<td class="text-center">${c.p1}</td>`;
+      row += `<td class="text-center text-blue-600 font-black">${c.p2}</td>`;
+
+      for (let m = 1; m <= 12; m++) {
+        row += `<td class="text-center ${c.s[m] ? 'schedule-active' : ''}">${c.s[m] || ''}</td>`;
+      }
+
+      row += `</tr>`;
+      tbody.innerHTML += row;
+    });
+
+    // 3. 카테고리 버튼 기능 (카드는 항상 6개 모두 표시, 강조 효과만)
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const cards = document.querySelectorAll('.modern-card');
+
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // 활성 버튼 변경
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const category = button.dataset.category;
+
+        // 모든 카드 표시, 선택된 카테고리만 강조
+        cards.forEach(card => {
+          if (card.dataset.category === category) {
+            card.style.transform = 'translateY(-8px)';
+            card.style.boxShadow = '0 20px 50px rgba(59, 130, 246, 0.3)';
+          } else {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.08)';
+          }
+        });
+      });
+    });
+
+    // 4. 카드 클릭 시 일정표로 스크롤
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI' || e.target.closest('li')) return;
+        document.getElementById('schedule').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      card.style.cursor = 'pointer';
+    });
+  </script>
+</body>
+
+</html>

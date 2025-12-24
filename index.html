@@ -328,7 +328,7 @@
 
     .card-icon-box i {
       font-size: 1.4rem;
-      color: white;
+      color: #64748B;
     }
 
     .card-title {
@@ -410,7 +410,7 @@
     /* 테이블 스타일 */
     .table-container {
       background: white;
-      border-radius: 1.5rem;
+      border-radius: 0;
       border: 1px solid #E2E8F0;
       overflow-x: auto;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -422,18 +422,21 @@
     }
 
     .schedule-table th {
-      background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
-      color: #475569;
+      background: #E2E8F0;
+      color: #1E293B;
       font-weight: 800;
-      padding: 1.25rem 0.75rem;
+      padding: 0.5rem;
       font-size: 0.9rem;
-      border-bottom: 2px solid #E2E8F0;
+      border: 1px solid #94A3B8;
       white-space: nowrap;
+      vertical-align: middle;
+      text-align: center;
     }
 
     .schedule-table td {
-      padding: 1rem 0.75rem;
-      border-bottom: 1px solid #F1F5F9;
+      padding: 0.5rem;
+      border: 1px solid #CBD5E1;
+      font-size: 0.9rem;
     }
 
     .schedule-table tbody tr {
@@ -448,6 +451,8 @@
       background-color: #F7FEE7 !important;
       color: #3F6212 !important;
       font-weight: 900;
+      font-size: 1.1em;
+      border: 2px solid #84CC16 !important;
     }
 
     .col-name {
@@ -742,24 +747,28 @@
         <table class="schedule-table">
           <thead>
             <tr>
-              <th style="width: 50px;">No</th>
-              <th style="min-width: 280px;">교육과정명</th>
-              <th style="width: 70px;">일수</th>
-              <th style="width: 70px;">시간</th>
+              <th rowspan="2" style="width: 50px;">No</th>
+              <th rowspan="2" style="min-width: 280px;">교육과정명</th>
+              <th rowspan="2" style="width: 60px;">일수</th>
+              <th rowspan="2" style="width: 60px;">시간</th>
+              <th colspan="2" class="bg-gray-200">교육비(만원)</th>
+              <th colspan="12" class="bg-gray-200">교육일정</th>
+            </tr>
+            <tr>
               <th style="width: 70px;">일반</th>
-              <th style="width: 70px;" class="text-blue-600">회원</th>
-              <th style="width: 80px;">1월</th>
-              <th style="width: 80px;">2월</th>
-              <th style="width: 80px;">3월</th>
-              <th style="width: 80px;">4월</th>
-              <th style="width: 80px;">5월</th>
-              <th style="width: 80px;">6월</th>
-              <th style="width: 80px;">7월</th>
-              <th style="width: 80px;">8월</th>
-              <th style="width: 80px;">9월</th>
-              <th style="width: 80px;">10월</th>
-              <th style="width: 80px;">11월</th>
-              <th style="width: 80px;">12월</th>
+              <th style="width: 70px;" class="text-blue-700">회원</th>
+              <th style="width: 50px;">1월</th>
+              <th style="width: 50px;">2월</th>
+              <th style="width: 50px;">3월</th>
+              <th style="width: 50px;">4월</th>
+              <th style="width: 50px;">5월</th>
+              <th style="width: 50px;">6월</th>
+              <th style="width: 50px;">7월</th>
+              <th style="width: 50px;">8월</th>
+              <th style="width: 50px;">9월</th>
+              <th style="width: 50px;">10월</th>
+              <th style="width: 50px;">11월</th>
+              <th style="width: 50px;">12월</th>
             </tr>
           </thead>
           <tbody id="courseTableBody"></tbody>

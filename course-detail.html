@@ -147,7 +147,7 @@
 
                     <!-- 2. Dual Pricing Display (Below Button) -->
                     <div
-                        class="flex items-center gap-8 bg-white/5 backdrop-blur-md border border-white/10 px-6 py-4 rounded-3xl w-fit sm:min-w-[400px]">
+                        class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 bg-white/5 backdrop-blur-md border border-white/10 px-6 py-4 rounded-3xl w-full sm:w-fit sm:min-w-[400px]">
 
                         <!-- General Price -->
                         <div class="flex flex-col">
@@ -159,8 +159,10 @@
                             </div>
                         </div>
 
-                        <!-- Divider -->
-                        <div class="w-px h-10 bg-white/10"></div>
+                        <!-- Divider (Desktop Vertical) -->
+                        <div class="hidden sm:block w-px h-10 bg-white/10"></div>
+                        <!-- Divider (Mobile Horizontal) -->
+                        <div class="block sm:hidden w-full h-px bg-white/10"></div>
 
                         <!-- Member Price -->
                         <div class="flex flex-col">
